@@ -10,6 +10,8 @@ var db = require("./models");
 var PORT = 3000;
 var app = express();
 
+var MONGODB_URI = process.env.MONGODB_URI||  mongodb://localhost/news
+
 app.use(logger("dev"));
 
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -17,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/news"
-  // ,{useMongoClient: true}
+mongoose.connect(MONGODB_URI 
+	//,{useMongoClient: true}
   );
 
 app.get("/scrape",function(req, res){
